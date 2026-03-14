@@ -17,11 +17,11 @@
       content="Celebrate the wedding of My Ngoc &amp; Ba Truong on March 22, 2026 at Tui Ba Gang Wedding and Convention."
     />
     <meta property="og:locale" content="vi_VN" />
-    <meta property="og:image" content="image/HIGH1129.png" />
+    <meta property="og:image" content="image/optimized/hero-bg.jpg" />
     <meta property="og:url" content="/" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/png" href="image/favicon.png" />
-    <link rel="preload" as="image" href="image/HIGH1129.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="image/optimized/hero-bg.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="css/menikah.css" />
   </head>
   <body class="is-loading">
@@ -32,7 +32,12 @@
       </div>
     </div>
     <main class="site-shell">
-      <section class="hero" aria-label="Wedding hero" data-preload-bg="image/HIGH1129.png">
+      <section
+        class="hero"
+        aria-label="Wedding hero"
+        data-preload-bg="image/optimized/hero-bg.jpg"
+        data-preload-critical="true"
+      >
         <div class="hero__content">
           <h1 class="hero__names">
             <span class="hero-name-line">My Ngoc</span>
@@ -78,18 +83,18 @@
       <section class="love-story-section">
         <div class="section-inner love-story__inner">
           <div class="love-story__top">
-            <figure class="love-story-photo photo-left">
-              <img src="image/HIGH1697.png" alt="Portrait of the groom" loading="eager" decoding="sync" fetchpriority="high" />
+            <figure class="love-story-photo photo-left reveal fade-right">
+              <img src="image/optimized/love-left.jpg" alt="Portrait of the groom" width="1067" height="1600" loading="lazy" decoding="async" fetchpriority="low" />
             </figure>
-            <figure class="love-story-photo photo-center">
-              <img src="image/HIGH2297 (1).jpeg" alt="Couple holding a bottle and glass" loading="eager" decoding="sync" fetchpriority="high" />
+            <figure class="love-story-photo photo-center reveal zoom-in" data-delay="80">
+              <img src="image/optimized/love-center.jpg" alt="Couple holding a bottle and glass" width="1067" height="1600" loading="lazy" decoding="async" fetchpriority="low" />
             </figure>
             <div class="love-story__side">
               <h2 class="love-story__title">
                 OUR LOVE STORY
               </h2>
-              <figure class="love-story-photo photo-right">
-                <img src="image/HIGH0693.png" alt="Portrait of the bride" loading="eager" decoding="sync" fetchpriority="high" />
+              <figure class="love-story-photo photo-right reveal fade-left" data-delay="160">
+                <img src="image/optimized/love-right.jpg" alt="Portrait of the bride" width="1067" height="1600" loading="lazy" decoding="async" fetchpriority="low" />
               </figure>
             </div>
           </div>
@@ -104,12 +109,15 @@
       </section>
 
       <section class="single-photo-section">
-        <figure class="single-photo-frame">
+        <figure class="single-photo-frame reveal zoom-in">
           <img
-            src="image/14FEEFC6-4226-4868-BA31-1AF141FE2D8F.jpeg"
+            src="image/optimized/single-photo.jpg"
             alt="Wedding portrait"
-            loading="eager"
-            decoding="sync"
+            width="2200"
+            height="1467"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
           />
         </figure>
       </section>
@@ -173,28 +181,31 @@
       <section class="gallery-overlay-section" data-preload-bg="image/0D183092-70AE-4143-B2E0-5FD4CE6CC71D.jpeg">
         <div class="gallery-overlay__inner">
           <div class="gallery-overlay__grid">
-            <figure class="gallery-overlay-card">
+            <figure class="gallery-overlay-card reveal fade-right">
               <img
                 src="image/6F5B55D6-8656-447E-AF6F-B234AF20C7B7.jpeg"
                 alt="Bride portrait"
-                loading="eager"
-                decoding="sync"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
               />
             </figure>
-            <figure class="gallery-overlay-card">
+            <figure class="gallery-overlay-card reveal zoom-in" data-delay="80">
               <img
                 src="image/HIGH1133.jpeg"
                 alt="Couple portrait in curtains"
-                loading="eager"
-                decoding="sync"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
               />
             </figure>
-            <figure class="gallery-overlay-card">
+            <figure class="gallery-overlay-card reveal fade-left" data-delay="160">
               <img
                 src="image/DA53AE39-7B8C-415C-A518-DE224A786EB7.jpeg"
                 alt="Couple portrait by the balcony"
-                loading="eager"
-                decoding="sync"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
               />
             </figure>
           </div>
@@ -203,8 +214,8 @@
 
       <section class="closing-note-section">
         <div class="section-inner closing-note__inner">
-          <figure class="closing-note-photo">
-            <img src="image/HIGH2815.png" alt="Soft floral detail" loading="eager" decoding="sync" />
+          <figure class="closing-note-photo reveal fade-right">
+            <img src="image/HIGH2815.png" alt="Soft floral detail" loading="lazy" decoding="async" fetchpriority="low" />
           </figure>
           <div class="reveal fade-left" data-delay="120">
             <h2 class="closing-note__title">

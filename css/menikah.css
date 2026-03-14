@@ -63,7 +63,7 @@ ul {
   justify-content: center;
   background:
     linear-gradient(rgba(201, 192, 171, 0.98), rgba(201, 192, 171, 0.98)),
-    url("../image/HIGH1129.png") center / cover no-repeat;
+    url("../image/optimized/hero-bg.jpg") center / cover no-repeat;
   opacity: 1;
   visibility: visible;
   transition:
@@ -145,7 +145,7 @@ ul {
     clamp(4rem, 10vw, 7rem);
   background:
     linear-gradient(var(--color-overlay), var(--color-overlay)),
-    url("../image/HIGH1129.png") center / cover no-repeat;
+    url("../image/optimized/hero-bg.jpg") center / cover no-repeat;
   color: var(--color-light);
   isolation: isolate;
 }
@@ -400,7 +400,8 @@ ul {
 .gallery-overlay-section {
   display: flex;
   align-items: center;
-  min-height: min(66vw, 920px);
+  min-height: clamp(28rem, 56vw, 46rem);
+  padding: clamp(1.1rem, 2.8vw, 2.5rem) 0;
   background:
     linear-gradient(rgba(28, 24, 20, 0.28), rgba(28, 24, 20, 0.28)),
     url("../image/0D183092-70AE-4143-B2E0-5FD4CE6CC71D.jpeg") center / cover
@@ -421,7 +422,7 @@ ul {
 }
 
 .gallery-overlay-card {
-  width: min(100%, 320px);
+  width: min(100%, 280px);
   margin: 0;
   padding: 0.45rem;
   background: rgba(234, 225, 213, 0.16);
@@ -430,8 +431,8 @@ ul {
 
 .gallery-overlay-card img {
   width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 .closing-note-section {
@@ -446,16 +447,15 @@ ul {
 }
 
 .closing-note-photo {
-  width: 70%;
+  width: min(100%, 420px);
   margin: 0;
   justify-self: center;
-  overflow: hidden;
 }
 
 .closing-note-photo img {
   width: 100%;
-  aspect-ratio: 4 / 4.5;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 .closing-note__title {
@@ -527,7 +527,7 @@ ul {
   }
 
   .gallery-overlay-section {
-    min-height: min(78vw, 860px);
+    min-height: clamp(27rem, 70vw, 50rem);
   }
 }
 
@@ -708,7 +708,7 @@ ul {
   }
 
   .gallery-overlay-card {
-    width: min(78vw, 320px);
+    width: min(72vw, 300px);
   }
 
   .closing-note__inner {

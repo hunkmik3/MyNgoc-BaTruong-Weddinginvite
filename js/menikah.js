@@ -1,5 +1,6 @@
 (function () {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let loaderDismissed = false;
 
   function waitForImageElement(image) {
     if (image.complete) {
@@ -39,6 +40,12 @@
   }
 
   function hidePageLoader() {
+    if (loaderDismissed) {
+      return;
+    }
+
+    loaderDismissed = true;
+
     const loader = document.querySelector(".page-loader");
 
     if (!loader) {
@@ -54,14 +61,20 @@
   }
 
   function initPageLoader() {
-    const imageTasks = Array.from(document.images).map(waitForImageElement);
-    const backgroundTasks = Array.from(document.querySelectorAll("[data-preload-bg]")).map(
+    const criticalImages = Array.from(document.images).filter(
+      (image) => image.dataset.preloadCritical === "true" || image.loading !== "lazy"
+    );
+    const imageTasks = criticalImages.map(waitForImageElement);
+    const backgroundTasks = Array.from(
+      document.querySelectorAll("[data-preload-bg][data-preload-critical]")
+    ).map(
       (element) => preloadSource(element.dataset.preloadBg)
     );
     const allAssetsReady = Promise.allSettled(imageTasks.concat(backgroundTasks));
-    const safetyTimeout = new Promise((resolve) => window.setTimeout(resolve, 12000));
+    const safetyTimeout = new Promise((resolve) => window.setTimeout(resolve, 4500));
 
     Promise.race([allAssetsReady, safetyTimeout]).then(hidePageLoader);
+    window.addEventListener("load", hidePageLoader, { once: true });
   }
 
   function initRevealAnimations() {
