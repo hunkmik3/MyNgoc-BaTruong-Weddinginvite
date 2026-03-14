@@ -1,62 +1,85 @@
-// Get that hamburger menu cookin' //
+(function () {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Get all "navbar-burger" elements
-  var $navbarBurgers = Array.prototype.slice.call(
-    document.querySelectorAll(".navbar-burger"),
-    0
-  );
-  // Check if there are any navbar burgers
-  if ($navbarBurgers.length > 0) {
-    // Add a click event on each of them
-    $navbarBurgers.forEach(function($el) {
-      $el.addEventListener("click", function() {
-        // Get the target from the "data-target" attribute
-        var target = $el.dataset.target;
-        var $target = document.getElementById(target);
-        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
-        $el.classList.toggle("is-active");
-        $target.classList.toggle("is-active");
-      });
+  function initRevealAnimations() {
+    const revealElements = document.querySelectorAll(".reveal");
+
+    revealElements.forEach((element) => {
+      const delay = Number(element.dataset.delay || 0);
+      element.style.setProperty("--reveal-delay", `${delay}ms`);
     });
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -8% 0px",
+      }
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
   }
-});
 
-// Smooth Anchor Scrolling
-$(document).on("click", 'a[href^="#"]', function(event) {
-  event.preventDefault();
-  $("html, body").animate(
-    {
-      scrollTop: $($.attr(this, "href")).offset().top
-    },
-    500
-  );
-});
-
-// When the user scrolls down 20px from the top of the document, show the scroll up button
-window.onscroll = function() {
-  scrollFunction();
-};
-
-function scrollFunction() {
-  var toTopButton = document.getElementById("toTop");
-  if (!toTopButton) {
-    return;
+  function pad(value) {
+    return String(value).padStart(2, "0");
   }
 
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    toTopButton.style.display = "block";
-  } else {
-    toTopButton.style.display = "none";
-  }
-}
+  function initCountdown() {
+    const countdown = document.querySelector(".hero__countdown");
 
-// Preloader
-$(document).ready(function($) {
-  $(".preloader-wrapper").fadeOut();
-  $("body").removeClass("preloader-site");
-});
-$(window).load(function() {
-  var Body = $("body");
-  Body.addClass("preloader-site");
-});
+    if (!countdown) {
+      return;
+    }
+
+    const targetDate = countdown.dataset.targetDate;
+    const targetTime = new Date(targetDate).getTime();
+
+    if (Number.isNaN(targetTime)) {
+      return;
+    }
+
+    const units = {
+      days: countdown.querySelector("[data-unit='days']"),
+      hours: countdown.querySelector("[data-unit='hours']"),
+      minutes: countdown.querySelector("[data-unit='minutes']"),
+      seconds: countdown.querySelector("[data-unit='seconds']"),
+    };
+
+    const updateCountdown = () => {
+      const now = Date.now();
+      const distance = Math.max(targetTime - now, 0);
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      units.days.textContent = pad(days);
+      units.hours.textContent = pad(hours);
+      units.minutes.textContent = pad(minutes);
+      units.seconds.textContent = pad(seconds);
+    };
+
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initRevealAnimations();
+    initCountdown();
+  });
+})();
