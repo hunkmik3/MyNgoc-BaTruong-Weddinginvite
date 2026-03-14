@@ -21,23 +21,29 @@
     <meta property="og:url" content="/" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/png" href="image/favicon.png" />
+    <link rel="preload" as="image" href="image/HIGH1129.png" fetchpriority="high" />
     <link rel="stylesheet" href="css/menikah.css" />
   </head>
-  <body>
+  <body class="is-loading">
+    <div class="page-loader" role="status" aria-live="polite" aria-label="Loading website">
+      <div class="page-loader__inner">
+        <div class="page-loader__spinner"></div>
+        <p class="page-loader__label">Loading our story...</p>
+      </div>
+    </div>
     <main class="site-shell">
-      <section class="hero" aria-label="Wedding hero">
-        <div class="hero__content reveal fade-up">
+      <section class="hero" aria-label="Wedding hero" data-preload-bg="image/HIGH1129.png">
+        <div class="hero__content">
           <h1 class="hero__names">
             <span class="hero-name-line">My Ngoc</span>
             <span class="hero-name-ampersand">&amp;</span>
             <span class="hero-name-line">Ba Truong</span>
           </h1>
-          <p class="hero__tagline reveal fade-up" data-delay="120">
+          <p class="hero__tagline">
             Are Getting Married
           </p>
           <div
-            class="hero__countdown reveal fade-up"
-            data-delay="220"
+            class="hero__countdown"
             data-target-date="2026-03-22T17:30:00+07:00"
           >
             <ul class="countdown-list">
@@ -63,7 +69,7 @@
             </ul>
           </div>
         </div>
-        <div class="hero__meta reveal fade-up" data-delay="320">
+        <div class="hero__meta">
           <p class="hero__meta-item">SUNDAY 22/3/2026, 17:30 PM</p>
           <p class="hero__meta-item">TUI BA GANG WEDDING AND CONVENTION</p>
         </div>
@@ -72,22 +78,22 @@
       <section class="love-story-section">
         <div class="section-inner love-story__inner">
           <div class="love-story__top">
-            <figure class="love-story-photo photo-left reveal fade-up" data-delay="40">
-              <img src="image/HIGH1697.png" alt="Portrait of the groom" />
+            <figure class="love-story-photo photo-left">
+              <img src="image/HIGH1697.png" alt="Portrait of the groom" loading="eager" decoding="sync" fetchpriority="high" />
             </figure>
-            <figure class="love-story-photo photo-center reveal fade-up" data-delay="140">
-              <img src="image/HIGH2297 (1).jpeg" alt="Couple holding a bottle and glass" />
+            <figure class="love-story-photo photo-center">
+              <img src="image/HIGH2297 (1).jpeg" alt="Couple holding a bottle and glass" loading="eager" decoding="sync" fetchpriority="high" />
             </figure>
             <div class="love-story__side">
-              <h2 class="love-story__title reveal fade-up" data-delay="240">
+              <h2 class="love-story__title">
                 OUR LOVE STORY
               </h2>
-              <figure class="love-story-photo photo-right reveal fade-up" data-delay="300">
-                <img src="image/HIGH0693.png" alt="Portrait of the bride" />
+              <figure class="love-story-photo photo-right">
+                <img src="image/HIGH0693.png" alt="Portrait of the bride" loading="eager" decoding="sync" fetchpriority="high" />
               </figure>
             </div>
           </div>
-          <p class="love-story__description reveal fade-up" data-delay="360">
+          <p class="love-story__description">
             We found each other in the most ordinary moments, and somehow those
             moments became our favorite memories. Through every laugh, every
             challenge, and every little step, we have grown side by side with
@@ -98,10 +104,12 @@
       </section>
 
       <section class="single-photo-section">
-        <figure class="single-photo-frame reveal zoom-in">
+        <figure class="single-photo-frame">
           <img
             src="image/14FEEFC6-4226-4868-BA31-1AF141FE2D8F.jpeg"
             alt="Wedding portrait"
+            loading="eager"
+            decoding="sync"
           />
         </figure>
       </section>
@@ -162,25 +170,31 @@
         </div>
       </section>
 
-      <section class="gallery-overlay-section">
+      <section class="gallery-overlay-section" data-preload-bg="image/0D183092-70AE-4143-B2E0-5FD4CE6CC71D.jpeg">
         <div class="gallery-overlay__inner">
           <div class="gallery-overlay__grid">
-            <figure class="gallery-overlay-card reveal zoom-in" data-delay="40">
+            <figure class="gallery-overlay-card">
               <img
                 src="image/6F5B55D6-8656-447E-AF6F-B234AF20C7B7.jpeg"
                 alt="Bride portrait"
+                loading="eager"
+                decoding="sync"
               />
             </figure>
-            <figure class="gallery-overlay-card reveal zoom-in" data-delay="160">
+            <figure class="gallery-overlay-card">
               <img
                 src="image/HIGH1133.jpeg"
                 alt="Couple portrait in curtains"
+                loading="eager"
+                decoding="sync"
               />
             </figure>
-            <figure class="gallery-overlay-card reveal zoom-in" data-delay="280">
+            <figure class="gallery-overlay-card">
               <img
                 src="image/DA53AE39-7B8C-415C-A518-DE224A786EB7.jpeg"
                 alt="Couple portrait by the balcony"
+                loading="eager"
+                decoding="sync"
               />
             </figure>
           </div>
@@ -189,8 +203,8 @@
 
       <section class="closing-note-section">
         <div class="section-inner closing-note__inner">
-          <figure class="closing-note-photo reveal fade-right">
-            <img src="image/HIGH2815.png" alt="Soft floral detail" />
+          <figure class="closing-note-photo">
+            <img src="image/HIGH2815.png" alt="Soft floral detail" loading="eager" decoding="sync" />
           </figure>
           <div class="reveal fade-left" data-delay="120">
             <h2 class="closing-note__title">

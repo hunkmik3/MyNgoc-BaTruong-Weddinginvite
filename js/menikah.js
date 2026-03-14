@@ -1,6 +1,69 @@
 (function () {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function waitForImageElement(image) {
+    if (image.complete) {
+      if (image.naturalWidth > 0 && typeof image.decode === "function") {
+        return image.decode().catch(function () {
+          return undefined;
+        });
+      }
+
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      const done = () => {
+        image.removeEventListener("load", done);
+        image.removeEventListener("error", done);
+        resolve();
+      };
+
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", done, { once: true });
+    });
+  }
+
+  function preloadSource(src) {
+    if (!src) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      const image = new Image();
+
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = src;
+    });
+  }
+
+  function hidePageLoader() {
+    const loader = document.querySelector(".page-loader");
+
+    if (!loader) {
+      document.body.classList.remove("is-loading");
+      return;
+    }
+
+    loader.classList.add("is-hidden");
+    window.setTimeout(() => {
+      document.body.classList.remove("is-loading");
+      loader.remove();
+    }, 480);
+  }
+
+  function initPageLoader() {
+    const imageTasks = Array.from(document.images).map(waitForImageElement);
+    const backgroundTasks = Array.from(document.querySelectorAll("[data-preload-bg]")).map(
+      (element) => preloadSource(element.dataset.preloadBg)
+    );
+    const allAssetsReady = Promise.allSettled(imageTasks.concat(backgroundTasks));
+    const safetyTimeout = new Promise((resolve) => window.setTimeout(resolve, 12000));
+
+    Promise.race([allAssetsReady, safetyTimeout]).then(hidePageLoader);
+  }
+
   function initRevealAnimations() {
     const revealElements = document.querySelectorAll(".reveal");
 
@@ -81,5 +144,6 @@
   document.addEventListener("DOMContentLoaded", function () {
     initRevealAnimations();
     initCountdown();
+    initPageLoader();
   });
 })();

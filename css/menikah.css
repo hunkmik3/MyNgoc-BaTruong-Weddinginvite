@@ -31,6 +31,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body.is-loading {
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -48,6 +52,55 @@ ul {
 
 .site-shell {
   overflow: hidden;
+}
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(rgba(201, 192, 171, 0.98), rgba(201, 192, 171, 0.98)),
+    url("../image/HIGH1129.png") center / cover no-repeat;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.45s ease,
+    visibility 0.45s ease;
+}
+
+.page-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.page-loader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.page-loader__spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 2px solid rgba(255, 245, 231, 0.35);
+  border-top-color: rgba(255, 245, 231, 0.98);
+  border-radius: 50%;
+  animation: page-loader-spin 0.95s linear infinite;
+}
+
+.page-loader__label {
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 231, 0.95);
 }
 
 .section-inner {
@@ -236,6 +289,14 @@ ul {
 .love-story-photo {
   margin: 0;
   overflow: hidden;
+}
+
+@media (min-width: 769px) {
+  .photo-left,
+  .photo-center,
+  .photo-right {
+    height: clamp(31rem, 43vw, 41rem);
+  }
 }
 
 .love-story-photo img {
@@ -660,6 +721,8 @@ ul {
     scroll-behavior: auto;
   }
 
+  .page-loader,
+  .page-loader__spinner,
   .reveal,
   .reveal.fade-left,
   .reveal.fade-right,
@@ -675,5 +738,11 @@ ul {
 
   .reveal {
     opacity: 1 !important;
+  }
+}
+
+@keyframes page-loader-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
