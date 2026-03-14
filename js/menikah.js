@@ -2,6 +2,42 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let loaderDismissed = false;
 
+  function forceScrollTop() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
+  function isReloadNavigation() {
+    if (typeof performance.getEntriesByType === "function") {
+      const navigationEntries = performance.getEntriesByType("navigation");
+      if (navigationEntries.length > 0) {
+        return navigationEntries[0].type === "reload";
+      }
+    }
+
+    if (performance.navigation) {
+      return performance.navigation.type === 1;
+    }
+
+    return false;
+  }
+
+  function initScrollBehavior() {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    if (!isReloadNavigation()) {
+      return;
+    }
+
+    forceScrollTop();
+    window.setTimeout(forceScrollTop, 0);
+    window.addEventListener("pageshow", forceScrollTop, { once: true });
+    window.addEventListener("load", forceScrollTop, { once: true });
+  }
+
   function waitForImageElement(image) {
     if (image.complete) {
       if (image.naturalWidth > 0 && typeof image.decode === "function") {
@@ -155,6 +191,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    initScrollBehavior();
     initRevealAnimations();
     initCountdown();
     initPageLoader();
